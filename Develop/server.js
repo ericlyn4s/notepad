@@ -33,7 +33,7 @@ app.get('/api/notes', (req, res) => {
 // POST route for new notes
 app.post('/api/notes', (req, res) => {
     const newNote = {};
-    newNote["ID"] = Math.round(Math.random()*100);
+    newNote["id"] = Math.floor(Math.random()*1000);
     newNote["text"] = req.body.text;
     newNote["title"] = req.body.title;
     notes.push(newNote);
