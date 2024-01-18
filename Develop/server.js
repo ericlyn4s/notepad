@@ -32,16 +32,12 @@ app.get('/api/notes', (req, res) => {
 
 // POST route for new notes
 app.post('/api/notes', (req, res) => {
-    const newNote = {};
-    newNote["id"] = Math.floor(Math.random()*1000);
-    newNote["text"] = req.body.text;
-    newNote["title"] = req.body.title;
-    notes.push(newNote);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    notes.push(req.body);
+    fs.writeFileSync('.db/db.json', JSON.stringify(notes));
 });
 
 // For delete route you'd have to add to your post route, adding IDs
-// For puling up an existing note, you'd need to add id's to every note saved and then pull up that ID
+// For puling up an existing route, you'd need to add id's to every note saved
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
