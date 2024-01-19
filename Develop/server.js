@@ -33,7 +33,8 @@ app.get('/api/notes', (req, res) => {
 // POST route for new notes
 app.post('/api/notes', (req, res) => {
     notes.push(req.body);
-    fs.writeFileSync('.db/db.json', JSON.stringify(notes));
+    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    renderNoteList();
 });
 
 // For delete route you'd have to add to your post route, adding IDs
