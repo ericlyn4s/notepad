@@ -32,9 +32,26 @@ app.get('/api/notes', (req, res) => {
 
 // POST route for new notes
 app.post('/api/notes', (req, res) => {
-    notes.push(req.body);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
-    renderNoteList();
+  const newNote = {};
+  newNote["ID"] = Math.round(Math.random()*100);
+  newNote["text"] = req.body.text;
+  newNote["title"] = req.body.title;
+  notes.push(newNote);
+  fs.writeFile('./db/db.json', JSON.stringify(notes));
+});
+
+// GET a specific note
+app.get('/api/notes/:', (req, res) => {
+  if (req.params.ID) {
+    const noteID = req.params.ID;
+    for (let i = 0; i < notes.length; i++) {
+      const currentID = notes[i];
+      if (currentID === noteID) {
+        res.json(currentID);
+        return;
+      }
+    }
+  }
 });
 
 // For delete route you'd have to add to your post route, adding IDs
