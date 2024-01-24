@@ -6,7 +6,7 @@ const notes = require('./db/db.json');
 const fs = require('fs');
 
 // For deployment, this assigns to the user's port on this server, OR 3001 
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 // Assigning an express call to variable 'app'
 const app = express();
