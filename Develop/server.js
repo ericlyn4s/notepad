@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const notes = require('./db/db.json');
+
 const fs = require('fs');
 
 // For deployment, this assigns to the user's port on this server, OR 3001 
@@ -27,8 +28,14 @@ app.get('/notes', (req, res) =>
 
 // GET request for existing notes
 app.get('/api/notes', (req, res) => {
-    res.status(200).json(notes);
-});
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+      if (err) {
+        console.info(err)
+      }
+      const newData = JSON.parse(data);
+      res.status(200).json(newData);
+    });
+  });
 
 // POST route for new notes
 app.post('/api/notes', (req, res) => {
@@ -37,8 +44,13 @@ app.post('/api/notes', (req, res) => {
   newNote["text"] = req.body.text;
   newNote["title"] = req.body.title;
   notes.push(newNote);
-  fs.writeFile('./db/db.json', JSON.stringify(notes));
-});
+  fs.writeFile('./db/db.json', JSON.stringify(notes), (err, data) => {
+    if (err) {
+      console.error(err);
+    }
+    res.json(data)
+    });
+  });
 
 // DELETE a specific note
 app.delete('/api/notes/:id', (req, res) => {
