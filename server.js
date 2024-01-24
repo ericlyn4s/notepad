@@ -52,25 +52,26 @@ app.post('/api/notes', (req, res) => {
     });
   });
 
-// DELETE a specific note
+/* DELETE a specific note - in progress!
 app.delete('/api/notes/:id', (req, res) => {
   fs.readFileSync('./db/db.json', 'utf8', (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedNotes = JSON.parse(data);
-      if (req.params.id) {
-        const noteID = req.params.id;
-          for (let i = 0; i < parsedNotes.length; i++) {
-          const currentID = notes[i];
-          if (currentID === noteID) {
-            res.json(currentID);
-            return;
-          }
-          }
-      }};
-  })
+      const filteredArr = parsedNotes.filter( element =>{ 
+        return element.id != req.params.id
+      });
+      fs.writeFile('.db/db.json', JSON.stringify(filteredArr), (err, data) => {
+        if (err) {
+          console.error(err);
+        }
+        res.json(data)
+        });
+        };
 });
+});
+*/
 
 // For delete route you'd have to add to your post route, adding IDs
 // For puling up an existing route, you'd need to add id's to every note saved
