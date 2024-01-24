@@ -20,7 +20,7 @@ When booting up the app, you can see any pre-existing notes on the lefthand side
 
 ## Credits
 
-I had a tutor session with Charlies Puentes-Matos on 1/17/2024
+I had tutor sessions with Charlies Puentes-Matos on 1/17/2024 and 1/24/2024
 
 ## License
 

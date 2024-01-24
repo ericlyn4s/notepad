@@ -1,3 +1,4 @@
+// Importing express.js, 'path' component, and our working database
 const express = require('express');
 const path = require('path');
 const notes = require('./db/db.json');
@@ -7,6 +8,7 @@ const fs = require('fs');
 // For deployment, this assigns to the user's port on this server, OR 3001 
 const PORT = process.env.port || 3001;
 
+// Assigning an express call to variable 'app'
 const app = express();
 
 // Middleware for parsing JSON and urlencoded form data
@@ -32,6 +34,7 @@ app.get('/api/notes', (req, res) => {
       if (err) {
         console.info(err)
       }
+      // Pull all new notes into the GET call
       const newData = JSON.parse(data);
       res.status(200).json(newData);
     });
@@ -44,6 +47,7 @@ app.post('/api/notes', (req, res) => {
   newNote["text"] = req.body.text;
   newNote["title"] = req.body.title;
   notes.push(newNote);
+  // Writing this new note to the database
   fs.writeFile('./db/db.json', JSON.stringify(notes), (err, data) => {
     if (err) {
       console.error(err);
@@ -73,9 +77,7 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 */
 
-// For delete route you'd have to add to your post route, adding IDs
-// For puling up an existing route, you'd need to add id's to every note saved
-
+// Send a notification of path when app is loaded
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
