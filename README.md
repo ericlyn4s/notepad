@@ -7,6 +7,7 @@ I created this application to test my knowledge of express.js. I've found this u
 ## Installation
 
 My app is being hosted on Heroku here:
+https://evening-lake-43204-4c14350ec551.herokuapp.com/
 
 The repository can be accessed here:
 https://github.com/ericlyn4s/notepad
